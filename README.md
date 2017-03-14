@@ -1,24 +1,25 @@
-
-![alt](https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/AmbisonicLogo.svg/1024px-AmbisonicLogo.svg.png)
-
 # Soundfield MEMS Tetra Mic
 
-This is a repository housing all things related to the slick new soundfield MEMS mic created in collaboration with NYU postdoc (Charlie Mydlarz) and graduate students from the MTech program. We are designing a first order ambisonics mic who's: enclosure will be 3D printed, electronics will be hand soldered and circuit boards will be designed with Eagle. 
+This is a repository housing all things related to the slick new soundfield MEMS mic created in collaboration with NYU postdoc [Charlie Mydlarz] (http://cusp.nyu.edu/people/charlie-mydlarz/) and graduate students from NYU's [MTech program] (http://steinhardt.nyu.edu/music/technology). 
+
+We are designing a first order ambisonics mic with: an enclosure entirely printed in 3D, hand soldered electronics and circuit boards which are being designed in [Eagle] (http://www.autodesk.com/products/eagle/overview). 
 
 We hope to make this project open source so that anyone who wants to experiment with ambisonics can print and build the mic themselves.
 
-The encoder and decoder will also be included and will run on Matlab or Octave GNU.
+The encoder and decoder will also be included and will run on [Matlab] (https://www.mathworks.com/products/matlab) or [Octave GNU] (https://www.gnu.org/software/octave).
 
 ## TODO: 
 
 * Eagle (Charlie)
 * Cad (Gabe)
-* Testing (All)
+* Testing (Ian, Chris, Spencer, Charlie, Gabe)
 * AES Paper (All)
 
 ## Documentation
 
-TODO: Write documentation
+Documentation will be included to describe how to build your own MEMS Ambisonic Mic, how to encode and decode the audio based on your speaker configuration and why this is useful. 
+
+We also want people to learn so we will try to include documentation about how the MEMS capsules work, what ambisonics is and some general principles of psychoacoustics and audio that make this all worth it. 
 
 ## Contributing
 
@@ -30,12 +31,16 @@ TODO: Write documentation
 
 ## History
 
-TODO: Write history
+We all it all to [Michael Gerzon] (http://www.surrounddiscography.com/uhjdisc/ambipubl.htm) 
 
 ## Credits
 
-TODO: Write credits
+- [Charlie Mydlarz] (http://cusp.nyu.edu/people/charlie-mydlarz/) : Eagle Board Design
+- [Gabriel Zalles] (http://www.gabrielzalles.com): CAD Design
+- [Ian] ()
+- [Chris] ()
+- [Spencer] ()
 
 ## License
 
-TODO: Write license
+![alt](https://www.shareicon.net/data/128x128/2015/11/02/665834_logo_512x512.png)
