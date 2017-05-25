@@ -1230,13 +1230,13 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <part name="C1" library="SparkFun-Capacitors" deviceset="0.1UF-16V(+-10%)(0402)" device=""/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
-<part name="VOUT-" library="CM-SparkFun-Connectors" deviceset="M01" device="PTH_2MM"/>
-<part name="VOUT+" library="CM-SparkFun-Connectors" deviceset="M01" device="PTH_2MM"/>
-<part name="VDD" library="CM-SparkFun-Connectors" deviceset="M01" device="PTH_2MM"/>
+<part name="VOUT-" library="CM-SparkFun-Connectors" deviceset="M01" device="PTH"/>
+<part name="VOUT+" library="CM-SparkFun-Connectors" deviceset="M01" device="PTH"/>
+<part name="VDD" library="CM-SparkFun-Connectors" deviceset="M01" device="PTH"/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="U$1" library="mems_ICS_40720" deviceset=" MEMS_ICS_40720" device=""/>
 <part name="GND" library="CM-SparkFun-Connectors-large_hole" deviceset="M01" device="PTH_NO_SILK_YES_STOP"/>
-<part name="GND_IN" library="CM-SparkFun-Connectors-2" deviceset="M01" device="PTH_2MM"/>
+<part name="GND_IN" library="CM-SparkFun-Connectors-2" deviceset="M01" device="PTH"/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>

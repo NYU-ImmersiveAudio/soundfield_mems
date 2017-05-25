@@ -8,16 +8,16 @@
 </settings>
 <grid distance="0.05" unitdist="mm" unit="mm" style="lines" multiple="2" display="yes" altdistance="0.1" altunitdist="mm" altunit="mm"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
@@ -187,10 +187,19 @@ We've spent an enormous amount of time creating and checking these footprints an
 &lt;br&gt;&lt;br&gt;
 You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
 <packages>
-<package name="1X01_2MM">
-<pad name="1" x="0" y="0" drill="2" diameter="3.302" rot="R90"/>
-<text x="-1.3462" y="1.8288" size="1.27" layer="25">&gt;NAME</text>
+<package name="1X01">
+<wire x1="1.27" y1="0.635" x2="0.635" y2="1.27" width="0.2032" layer="21"/>
+<wire x1="0.635" y1="1.27" x2="-0.635" y2="1.27" width="0.2032" layer="21"/>
+<wire x1="-0.635" y1="1.27" x2="-1.27" y2="0.635" width="0.2032" layer="21"/>
+<wire x1="-1.27" y1="0.635" x2="-1.27" y2="-0.635" width="0.2032" layer="21"/>
+<wire x1="-1.27" y1="-0.635" x2="-0.635" y2="-1.27" width="0.2032" layer="21"/>
+<wire x1="-0.635" y1="-1.27" x2="0.635" y2="-1.27" width="0.2032" layer="21"/>
+<wire x1="0.635" y1="-1.27" x2="1.27" y2="-0.635" width="0.2032" layer="21"/>
+<wire x1="1.27" y1="-0.635" x2="1.27" y2="0.635" width="0.2032" layer="21"/>
+<pad name="1" x="0" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
+<text x="1.1938" y="1.8288" size="1.27" layer="25">&gt;NAME</text>
 <text x="-1.27" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
 </package>
 </packages>
 </library>
@@ -236,10 +245,19 @@ We've spent an enormous amount of time creating and checking these footprints an
 &lt;br&gt;&lt;br&gt;
 You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
 <packages>
-<package name="1X01_2MM">
-<pad name="1" x="0" y="0" drill="2" diameter="3.302" rot="R90"/>
-<text x="-1.3462" y="1.8288" size="1.27" layer="25">&gt;NAME</text>
+<package name="1X01">
+<wire x1="1.27" y1="0.635" x2="0.635" y2="1.27" width="0.2032" layer="21"/>
+<wire x1="0.635" y1="1.27" x2="-0.635" y2="1.27" width="0.2032" layer="21"/>
+<wire x1="-0.635" y1="1.27" x2="-1.27" y2="0.635" width="0.2032" layer="21"/>
+<wire x1="-1.27" y1="0.635" x2="-1.27" y2="-0.635" width="0.2032" layer="21"/>
+<wire x1="-1.27" y1="-0.635" x2="-0.635" y2="-1.27" width="0.2032" layer="21"/>
+<wire x1="-0.635" y1="-1.27" x2="0.635" y2="-1.27" width="0.2032" layer="21"/>
+<wire x1="0.635" y1="-1.27" x2="1.27" y2="-0.635" width="0.2032" layer="21"/>
+<wire x1="1.27" y1="-0.635" x2="1.27" y2="0.635" width="0.2032" layer="21"/>
+<pad name="1" x="0" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
+<text x="1.1938" y="1.8288" size="1.27" layer="25">&gt;NAME</text>
 <text x="-1.27" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
 </package>
 </packages>
 </library>
@@ -434,20 +452,20 @@ Please make sure your boards conform to these design rules.</description>
 <attribute name="PROD_ID" value="CAP-12416" x="13.38" y="7.35" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="12.237" y="8.4295" size="0.4064" layer="27" rot="R270"/>
 </element>
-<element name="VOUT-" library="CM-SparkFun-Connectors" package="1X01_2MM" value="" x="10" y="5.5" smashed="yes">
+<element name="VOUT-" library="CM-SparkFun-Connectors" package="1X01" value="" x="10" y="5.5" smashed="yes">
 <attribute name="VALUE" x="8.73" y="2.325" size="1.27" layer="27"/>
 </element>
-<element name="VOUT+" library="CM-SparkFun-Connectors" package="1X01_2MM" value="" x="6.25" y="10.1" smashed="yes" rot="R270">
+<element name="VOUT+" library="CM-SparkFun-Connectors" package="1X01" value="" x="6.25" y="10.1" smashed="yes" rot="R270">
 <attribute name="VALUE" x="3.075" y="11.37" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="VDD" library="CM-SparkFun-Connectors" package="1X01_2MM" value="" x="13.75" y="10" smashed="yes">
+<element name="VDD" library="CM-SparkFun-Connectors" package="1X01" value="" x="13.75" y="10" smashed="yes">
 <attribute name="VALUE" x="12.48" y="6.825" size="1.27" layer="27"/>
 </element>
 <element name="U$1" library="mems_ICS_40720" package=" MEMS_ICS_40720" value=" MEMS_ICS_40720" x="8.5" y="7.32"/>
 <element name="GND" library="CM-SparkFun-Connectors-large_hole" package="1X01_NO_SILK" value="" x="10" y="10" smashed="yes">
 <attribute name="VALUE" x="8.73" y="6.825" size="1.27" layer="27"/>
 </element>
-<element name="GND_IN" library="CM-SparkFun-Connectors-2" package="1X01_2MM" value="" x="10.05" y="13.55" smashed="yes" rot="R270">
+<element name="GND_IN" library="CM-SparkFun-Connectors-2" package="1X01" value="" x="10.05" y="13.55" smashed="yes" rot="R270">
 <attribute name="VALUE" x="6.875" y="14.82" size="1.27" layer="27" rot="R270"/>
 </element>
 </elements>
