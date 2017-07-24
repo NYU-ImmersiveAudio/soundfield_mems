@@ -1325,6 +1325,7 @@ save('ScanIR_AutoSave', 'tempData', 'specs', 'app');
 % repeat measurement process - CM edit
 rotVal = str2double(get(handles.rotValEdit,'String'));
 
+% Add step size to current azimuth for next azimuth value
 currentAz = str2double(get(handles.az_edit, 'String'));
 currentAz = currentAz + rotVal;
 
