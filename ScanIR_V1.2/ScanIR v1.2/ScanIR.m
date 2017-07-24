@@ -1328,18 +1328,23 @@ rotVal = str2double(get(handles.rotValEdit,'String'));
 currentAz = str2double(get(handles.az_edit, 'String'));
 currentAz = currentAz + rotVal;
 
+% Get user defined max azimuth
 maxAz = str2double(get(handles.maxAngleEdit, 'String'));
 
+% Stop measurement process if max will be exceeded
 if (currentAz > maxAz)
     return
 end
 
+% Set azimuth text box to new Azimuth value
 set(handles.az_edit, 'String', num2str(currentAz));
 
+% Advnace measurement index forward one
 handles = goForward(hObject, handles);
 
 rotatePlatform(num2str(rotVal));
 
+% Call this measurement function again
 autoMeasureButton_Callback(hObject, eventdata, handles);
 
 % --- Function to rotate platform by a given number of degrees (CM addition)
