@@ -1,12 +1,12 @@
 # Soundfield MEMS Tetra Mic
 
-This is a repository housing all things related to the slick new soundfield MEMS mic created in collaboration with NYU postdoc [Charlie Mydlarz] (http://cusp.nyu.edu/people/charlie-mydlarz/) and graduate students from NYU's [MTech program] (http://steinhardt.nyu.edu/music/technology). 
+This is a repository housing all things related to the slick new soundfield MEMS mic created in collaboration with NYU postdoc [Charlie Mydlarz](http://cusp.nyu.edu/people/charlie-mydlarz/) and graduate students from NYU's [MTech program](http://steinhardt.nyu.edu/music/technology). 
 
-We are designing a first order ambisonics mic with: an enclosure entirely printed in 3D, hand soldered electronics and circuit boards which are being designed in [Eagle] (http://www.autodesk.com/products/eagle/overview). 
+We are designing a first order ambisonics mic with: an enclosure entirely printed in 3D, hand soldered electronics and circuit boards which are being designed in [Eagle](http://www.autodesk.com/products/eagle/overview). 
 
 We hope to make this project open source so that anyone who wants to experiment with ambisonics can print and build the mic themselves.
 
-The encoder and decoder will also be included and will run on [Matlab] (https://www.mathworks.com/products/matlab) or [Octave GNU] (https://www.gnu.org/software/octave).
+The encoder and decoder will also be included and will run on [Matlab](https://www.mathworks.com/products/matlab) or [Octave GNU](https://www.gnu.org/software/octave).
 
 ## TODO: 
 
@@ -31,12 +31,12 @@ We also want people to learn so we will try to include documentation about how t
 
 ## History
 
-We all it all to [Michael Gerzon] (http://www.surrounddiscography.com/uhjdisc/ambipubl.htm) 
+[Michael Gerzon](http://www.surrounddiscography.com/uhjdisc/ambipubl.htm) 
 
 ## Credits
 
-- [Charlie Mydlarz] (http://cusp.nyu.edu/people/charlie-mydlarz/) : Eagle Board Design
-- [Gabriel Zalles] (http://www.gabrielzalles.com): CAD Design
+- [Charlie Mydlarz](http://cusp.nyu.edu/people/charlie-mydlarz/) : Eagle Board Design
+- [Gabriel Zalles](http://www.gabrielzalles.com): CAD Design
 - [Ian] ()
 - [Chris] ()
 - [Spencer] ()
