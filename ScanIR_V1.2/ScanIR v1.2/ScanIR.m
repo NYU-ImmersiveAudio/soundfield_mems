@@ -46,6 +46,7 @@ end
 % End initialization code - DO NOT EDIT
 
 
+
 % --- Executes just before ScanIR is made visible.
 function ScanIR_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
@@ -53,6 +54,8 @@ function ScanIR_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to ScanIR (see VARARGIN)
+
+
 
 % Choose default command line output for ScanIR
 handles.output = hObject;
@@ -63,6 +66,21 @@ set(hObject,'toolbar','figure');
 handles.data = [];
 handles.specs = [];
 handles.app = [];
+handles.motor = [];
+
+%% connect
+a = arduino('/dev/tty.usbmodem1411', 'Uno', 'Libraries', 'Adafruit\MotorShieldV2');
+
+%% initialize
+shield = addon(a, 'Adafruit\MotorShieldV2');
+% addrs = scanI2CBus(a, 0);
+sm = stepper(shield, 2, 200, 'stepType', 'Single');
+sm.RPM = 10;
+
+handles.motor.a = a;
+handles.motor.shield = shield;
+handles.motor.sm = sm;
+
 
 handles.specs.filtertype = 'fixed filters';
 handles.specs.subjectName = [];
@@ -1252,6 +1270,13 @@ function autoMeasureButton_Callback(hObject, eventdata, handles)
 % hObject    handle to autoMeasureButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+currentAz = str2double(get(handles.az_edit, 'String'));
+
+if (currentAz == 0)
+    pause(15)
+end
+
 set(handles.measureButton, 'Enable', 'off');
 if (handles.app.currID ~= 1)
     set(handles.backButton, 'Enable', 'off');
@@ -1323,14 +1348,18 @@ app = handles.app; % save entire ScanIR application-specific struct
 save('ScanIR_AutoSave', 'tempData', 'specs', 'app');
 
 % repeat measurement process - CM edit
-rotVal = str2double(get(handles.rotValEdit,'String'));
-
-% Add step size to current azimuth for next azimuth value
-currentAz = str2double(get(handles.az_edit, 'String'));
-currentAz = currentAz + rotVal;
+stepCount = str2double(get(handles.rotValEdit,'String'));
 
 % Get user defined max azimuth
 maxAz = str2double(get(handles.maxAngleEdit, 'String'));
+
+degDelta = maxAz / stepCount;
+
+% Add step size to current azimuth for next azimuth value
+currentAz = str2double(get(handles.az_edit, 'String'));
+currentAz = currentAz + degDelta;
+
+stepDelta = degDelta / 1.8;
 
 % Stop measurement process if max will be exceeded
 if (currentAz > maxAz)
@@ -1343,16 +1372,21 @@ set(handles.az_edit, 'String', num2str(currentAz));
 % Advnace measurement index forward one
 handles = goForward(hObject, handles);
 
-rotatePlatform(num2str(rotVal));
+rotatePlatform(handles, stepDelta);
 
 % Call this measurement function again
 autoMeasureButton_Callback(hObject, eventdata, handles);
 
 % --- Function to rotate platform by a given number of degrees (CM addition)
-function rotatePlatform(degrees)
-    rotinfotext = strcat('Rotating-> ', num2str(degrees), ' degrees');
-    disp(rotinfotext);
-%     Put code to rotate by given degrees here...
+function rotatePlatform(handles, stepDelta)
+%     rotinfotext = strcat('Rotating-> ', num2str(stepDelta), ' degrees');
+%     disp(rotinfotext);
+    %% step once
+    steps = stepDelta;
+    move(handles.motor.sm, steps);
+    pause(1.0);
+    release(handles.motor.sm);
+    pause(1.0);
 return
 
 
