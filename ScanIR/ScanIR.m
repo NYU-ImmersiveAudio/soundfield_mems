@@ -46,6 +46,7 @@ end
 % End initialization code - DO NOT EDIT
 
 
+
 % --- Executes just before ScanIR is made visible.
 function ScanIR_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
@@ -53,6 +54,8 @@ function ScanIR_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to ScanIR (see VARARGIN)
+
+
 
 % Choose default command line output for ScanIR
 handles.output = hObject;
@@ -63,6 +66,21 @@ set(hObject,'toolbar','figure');
 handles.data = [];
 handles.specs = [];
 handles.app = [];
+handles.motor = [];
+
+%% connect
+a = arduino('/dev/tty.usbmodem1411', 'Uno', 'Libraries', 'Adafruit\MotorShieldV2');
+
+%% initialize
+shield = addon(a, 'Adafruit\MotorShieldV2');
+% addrs = scanI2CBus(a, 0);
+sm = stepper(shield, 2, 200, 'stepType', 'Single');
+sm.RPM = 10;
+
+handles.motor.a = a;
+handles.motor.shield = shield;
+handles.motor.sm = sm;
+
 
 handles.specs.filtertype = 'fixed filters';
 handles.specs.subjectName = [];
@@ -95,7 +113,7 @@ if ( strcmp(opening, 'createNew') )
     handles.app.outMode = setup.outMode;
     handles.maxOuts = setup.maxOuts;
     handles.app.numPlays = setup.numPlays;
-    
+
     if (handles.app.sigLength == 1)
         set(handles.sigLengthDisp, 'String', strcat(num2str(handles.app.sigLength),' second'));
     else
@@ -108,7 +126,7 @@ if ( strcmp(opening, 'createNew') )
 elseif ( strcmp(opening, 'loadSession') )
     handles = loadFile(hObject, handles);
     % find maximum number of output and input channels
-    
+
     InitializePsychSound;
     dev = PsychPortAudio('GetDevices');
     [m n] = size(dev);
@@ -173,7 +191,7 @@ if (size(handles.data,2) < 1)
     set(handles.forwardButton, 'Enable', 'off');
 end
 
-% Arduino Stepper Motor rotating function 
+% Arduino Stepper Motor rotating function
 handles.a = arduino('/dev/tty.usbmodem1411', 'Uno', 'Libraries', 'Adafruit\MotorShieldV2');
 
 %% initialize
@@ -465,7 +483,7 @@ else % if we're loading HRIRs from a different database with no ScanIR-specific 
     end
     set(handles.sigLengthDisp, 'String', 'unknown');
     handles.app.numPlays = 1;
-    
+
 end
 handles.app.currID = 1;
 set(handles.modeDisp, 'String', modeString);
@@ -536,7 +554,7 @@ if (plottype == 1) %time domain overlay
     xlabel('Time (samples)');
     ylabel('Amplitude');
     lgnd = 1;
-    
+
 elseif (plottype == 2) %frequency - overlay
     %    fftlen =  2^nextpow2(length(handles.data(handles.app.currID).IR));
     %    RESP = 20*log10(abs(fft(handles.data(handles.app.currID).IR(:,:),fftlen)));
@@ -556,7 +574,7 @@ elseif (plottype == 2) %frequency - overlay
     xlabel('Frequency (kHz)');
     ylabel('dB');
     lgnd = 1;
-    
+
 elseif (plottype == 3) %time domain cascade
     hold off
     maxVal = 0;
@@ -574,7 +592,7 @@ elseif (plottype == 3) %time domain cascade
     ylabel('Channel');
     yL = get(handles.plotarea, 'ylim');
     disp(yL);
-    
+
 elseif (plottype == 4) %frequency - cascade
     if (handles.app.numInputChls == 1)
         set(handles.plottype_popup, 'Value', 2);
@@ -599,7 +617,7 @@ elseif (plottype == 4) %frequency - cascade
         zlabel('dB');
         set(handles.plotarea,'xtick', [1:handles.app.numInputChls]);
     end;
-    
+
 elseif (plottype == 5) %frequency - cascade by channel
     chl = str2num(get(handles.freqchl_edit, 'String'));
     resp = [];
@@ -610,13 +628,13 @@ elseif (plottype == 5) %frequency - cascade by channel
         r = r(strt:min(strt+fftlen-1, length(r)));
         resp = [resp, r];
     end;
-    
+
     RESP = 20*log10(abs(fft(resp,fftlen)));
     x = [];
     for i = 1:size(handles.data, 2)
         x = [x, handles.data(i).distance];
     end;
-    
+
     if (size(RESP, 2)>9)
         imagesc_up(1:size(RESP,2),[0:1/(length(RESP)/2):.5]*(handles.specs.sampleRate/1000/2),RESP(1:length(RESP)/4+1, :),'auto',8,8,[]);
     else
@@ -630,7 +648,7 @@ elseif (plottype == 5) %frequency - cascade by channel
     xlabel('ID');
     ylabel('Frequency (kHz)');
     zlabel('dB');
-    
+
 end;
 
 %legend
@@ -732,7 +750,7 @@ else  % set up vector of azimuths for non-zero intervals
     elseif (azStart < -360)
         azStart = -360;
     end
-    
+
     handles.hrir_az = (azStart:azInt:azEnd);
     if (azEnd == 360 || azEnd == -360)
         handles.hrir_az(end) = 0;
@@ -777,18 +795,18 @@ handles.app.elPositionData(handles.numSeries,3) = elEnd;
 % update npositions and seriesInfo
 if (handles.app.outMode == 1) % mono output mode
     handles.app.npositions(handles.numSeries) = length(handles.hrir_az) * length(handles.hrir_el);
-    
+
     if (handles.numSeries == 1)
         handles.app.seriesInfo(1) = handles.app.npositions(handles.numSeries);
     else
         handles.app.seriesInfo(handles.numSeries) = handles.app.npositions(handles.numSeries) + handles.app.seriesInfo(handles.numSeries-1);
     end
-    
+
     set(handles.hrir_panel,'Title',['HRIR Locations for ' num2str(handles.app.currID) '-' num2str(handles.app.currID + handles.app.npositions(handles.numSeries) - 1)]);
     handles = calcModID(hObject, handles);
-    
+
     elIndex = ceil(handles.modID/length(handles.hrir_az));
-    
+
     if (mod(handles.modID,length(handles.hrir_az)) == 0)
         azIndex = length(handles.hrir_az);
     else
@@ -801,7 +819,7 @@ elseif (handles.app.outMode == 2) % multichannel output mode
         handles.app.seriesInfo(handles.numSeries) = handles.app.npositions(handles.numSeries) + handles.app.seriesInfo(handles.numSeries-1);
     end
     handles = calcModID(hObject, handles);
-    
+
     azIndex = handles.modID;
     elIndex = handles.modID;
 end
@@ -821,7 +839,7 @@ if (handles.app.outMode == 1)
     startVal = str2num(get(handles.az_start, 'String'));
     stopVal = str2num(get(handles.az_end, 'String'));
     testSign = sign(stopVal - startVal);
-    
+
     if (sign(testVal) ~= testSign && testSign ~= 0)
         testVal = testVal * -1;
         set(handles.az_interval, 'String', num2str(testVal) );
@@ -853,7 +871,7 @@ if (handles.app.outMode == 1)
     startVal = str2num(get(handles.az_start, 'String'));
     stopVal = str2num(get(handles.az_end, 'String'));
     testSign = sign(stopVal - startVal);
-    
+
     if (testVal == 0)
         if (testSign == 0)
             testVal = 1;
@@ -922,7 +940,7 @@ if (handles.app.outMode == 1)
     startVal = str2num(get(handles.el_start, 'String'));
     stopVal = str2num(get(handles.el_end, 'String'));
     testSign = sign(stopVal - startVal);
-    
+
     if (sign(testVal) ~= testSign && testSign ~= 0)
         testVal = testVal * -1;
         set(handles.el_interval, 'String', num2str(testVal) );
@@ -952,7 +970,7 @@ if (handles.app.outMode == 1)
     startVal = str2num(get(handles.el_start, 'String'));
     stopVal = str2num(get(handles.el_end, 'String'));
     testSign = sign(stopVal - startVal);
-    
+
     if (testVal == 0)
         if (testSign == 0)
             testVal = 1;
@@ -1117,7 +1135,7 @@ end
 if (handles.app.inMode == 2) % in HRIR mode
     if ( handles.app.currID - 1 == handles.app.seriesInfo(handles.numSeries) ) % moving forward to another series (may or may not be new)
         handles.numSeries = handles.numSeries + 1;
-        
+
         if ( (handles.app.currID > size(handles.data,2) ) &&(handles.numSeries ~= length(handles.app.npositions)) ) % going forward to a new series
             handles = newSeries(hObject, handles);
         end
@@ -1129,14 +1147,14 @@ if (handles.app.inMode == 2) % in HRIR mode
         set(handles.el_interval,'String', num2str(handles.app.elPositionData(handles.numSeries,2)));
         set(handles.el_end,'String', num2str(handles.app.elPositionData(handles.numSeries,3)));
     end
-    
+
     if (handles.app.currID > size(handles.data,2)) % when we're going forward to a new recording index
         set(handles.forwardButton, 'Enable', 'off');
         handles = calcModID(hObject, handles);
-        
+
         if (handles.app.outMode == 1) % single channel output mode
             elIndex = ceil(handles.modID/length(handles.hrir_az));
-            
+
             if (mod(handles.modID,length(handles.hrir_az)) == 0)
                 azIndex = length(handles.hrir_az);
             else
@@ -1152,7 +1170,7 @@ if (handles.app.inMode == 2) % in HRIR mode
         set(handles.el_edit, 'String', num2str(currentEl));
     end
 else % in Mono or Multi-input mode
-    
+
     if (handles.app.currID > size(handles.data,2)) % when we're going forward to a new position
         set(handles.forwardButton, 'Enable', 'off');
     end
@@ -1208,7 +1226,7 @@ if (handles.app.outMode == 1) % mono output mode
     else
         handles.app.seriesInfo(handles.numSeries) = handles.app.npositions(handles.numSeries) + handles.app.seriesInfo(handles.numSeries-1);
     end
-    
+
     set(handles.hrir_panel,'Title',['HRIR Locations for ' num2str(handles.app.currID) '-' num2str(handles.app.currID + handles.app.npositions(handles.numSeries) - 1)]);
 elseif (handles.app.outMode == 2) % multichannel output mode
     handles.app.npositions(handles.numSeries) = handles.app.npositions(handles.numSeries-1);
@@ -1335,14 +1353,18 @@ app = handles.app; % save entire ScanIR application-specific struct
 save('ScanIR_AutoSave', 'tempData', 'specs', 'app');
 
 % repeat measurement process - CM edit
-rotVal = str2double(get(handles.rotValEdit,'String'));
-
-% Add step size to current azimuth for next azimuth value
-currentAz = str2double(get(handles.az_edit, 'String'));
-currentAz = currentAz + rotVal;
+stepCount = str2double(get(handles.rotValEdit,'String'));
 
 % Get user defined max azimuth
 maxAz = str2double(get(handles.maxAngleEdit, 'String'));
+
+degDelta = maxAz / stepCount;
+
+% Add step size to current azimuth for next azimuth value
+currentAz = str2double(get(handles.az_edit, 'String'));
+currentAz = currentAz + degDelta;
+
+stepDelta = degDelta / 1.8;
 
 % Stop measurement process if max will be exceeded
 if (currentAz > maxAz)
@@ -1372,10 +1394,10 @@ function rotatePlatform(hObject,handles,degrees)
     pause(1);
     release(handles.sm);
     pause(1);
-    
 
-    
-    
+
+
+
 
 function rotValEdit_Callback(hObject, eventdata, handles)
 % hObject    handle to rotValEdit (see GCBO)
