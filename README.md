@@ -52,7 +52,7 @@ Remember, keep phantom power off!
 ## Credits
 
 - [Charlie Mydlarz](http://cusp.nyu.edu/people/charlie-mydlarz/) : Eagle Board Design
-- [Gabriel Zalles](https://www.gzalles.github.io): CAD Design
+- [Gabriel Zalles](https:// gzalles.github.io): CAD Design
 - [Spencer Cappiello](www.spencercappiello.com): misc.
 - [Ian Anderson](): misc.
 
