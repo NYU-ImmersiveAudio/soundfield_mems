@@ -1,4 +1,4 @@
-# MEMS FOA Mic
+# MEMS FOA Mic - ⌘
 
 ## Intro
 
@@ -37,10 +37,9 @@ Remember, keep phantom power off!
 
 ### Optional
 - Multimeter: to check that none of your connections have short-circuited.
-- A clamp to help with the soldering.
--->
+- A clamp to help with the soldering. -->
 
-[Here](https://sites.google.com/nyu.edu/open-source-vr-mic-nyu/) is a link to our Google site with more info and a step-by-step process.
+[Here](https://sites.google.com/nyu.edu/open-source-vr-mic-nyu/) is a link to our Google site with more info.
 
 ## Contributing
 
