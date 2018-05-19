@@ -1,4 +1,4 @@
-# MEMS FOA Mic - G Zalles Fork
+# MEMS FOA Mic - ⌘
 
 ## Intro
 
